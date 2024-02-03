@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        /* Define your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #00ad51;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .header h2{
+            margin:0;
+        }
+        .order-details {
+            margin: 20px 0;
+        }
+        .order-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-details th,
+        .order-details td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .order-details th {
+            background-color: #f2f2f2;
+        }
+        .delivery-info {
+            margin-top: 20px;
+        }
+        td{
+            text-align : center;
+        }
+        .imp{
+            color:red;
+        }
+        .name{
+            
+        }
+        .name h1,h3{
+            text-align: center;
+            text-transform: uppercase;
+            color: #555454;
+        }
+        .card {
+            width: 99%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: #f1f1f1;
+            padding: 10px;
+
+            border-bottom: 2px solid #ccc;
+            height:30px;
+       
+        }
+        .card-header h2{
+            margin:0;
+            margin-top:5px;
+            color : #555454;
+            font-size: 19px;
+        }
+
+        .card-body {
+            padding: 20px;
+            background-color: #f1f1f1;
+
+        }
+
+        .order-details {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .first_cell{
+            width: 320px;
+            text-align: right;
+        }
+        h4{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 > <img src="https://robomartbd.com/assets/logo.png" height="60" width="130" style="vertical-align: middle;"> ORDER DETAILS </h2>
+        </div>
+        <div class="name">
+            <h1>Hello {{order.user.first_name}} {{order.user.last_name}},</h1>
+            <h3>THANK YOU FOR SHOPPING WITH ROBOMARTBD!</h3>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h2>ORDER DETAILS</h2>
+            </div>
+            <div class="card-body">
+                <div class="order-details">
+                    OrderID: #{{order.id}}
+                    Placed on {{order.order_date}}
+                </div>
+                <div class="payment-details">
+                    Payment Option: {{order.billing_option}}<br>
+                    Payment Status: {{invoice.status}} <br>
+                    Applied Coupon: {{order.cupon}} <br>
+                    Shipping: {{order.delevary_location}}
+                </div>
+            </div>
+        </div>
+        <div class="order-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price (BDT)</th>
+                        <th>Total Price (BDT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }} </td>
+                        <td>{{ item.price }} </td>
+                    </tr>
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <table>
+                <tr>
+                    <th class='first_cell'>Subtotal (BDT)</th>
+                    <th>{{product_price}}</th>
+
+                </tr>
+
+                <tr>
+                    <th class='first_cell'>Discount</th>
+                    <th>{{order.price_after_add_copun}}</th>
+
+                </tr>
+
+                <tr>
+                    <th class='first_cell'>Shipping Charge</th>
+                    <th>{{order.delevary_location.price }}</th>
+
+                </tr>
+
+                <tr>
+                    <th class='first_cell'>Total Tax Paid</th>
+                    <th>0</th>
+
+                </tr>
+                
+                <tr>
+                    <th class='first_cell'> <b>Total</b></th>
+                    <th>{{ order.total_price }}</th>
+
+                </tr>
+
+                <tr>
+                    <th class='first_cell'>Total Payable (BDT)</th>
+                    <th>{{ order.total_price }}</th>
+
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>SHIPPING ADDRESS</h2>
+            </div>
+            <div class="card-body">
+                <div class="payment-details">
+                    {{order.user.first_name}} {{order.user.last_name}} <br>
+                    {{ order.phone }} 
+                </div>
+                <div class="order-details">
+                    
+                    {{ order.address }}
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>BILLING ADDRESS</h2>
+            </div>
+            <div class="card-body">
+                <div class="payment-details">
+                    {{order.user.first_name}} {{order.user.last_name}} <br>
+                    {{ order.phone }} 
+                </div>
+                <div class="order-details">
+                    
+                    {{ order.address }}
+                    
+                </div>
+
+            </div>
+        </div>
+        <div class="foter">
+            <br>
+            <br>
+            <br>
+
+            <p>
+                You can review your order from the <a target="_blank" href="https://robomartbd.com/dashboard/user/order_history">Order history</a>  section of your customer account by clicking <a target="_blank" href="https://robomartbd.com/">"My account"</a>  on our shop.
+
+            </p>
+            <hr>
+            <hr>
+            <h4>Thank You ❤️ </h4>
+        </div>
+    </div>
+
+   
+</body>
+</html>
