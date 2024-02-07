@@ -119,8 +119,8 @@ class Pages(models.Model):
 class Comment(models.Model):
     commented_by = models.ForeignKey(User,on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
-    comment = models.TextField(max_length=500)
-    reply = models.TextField(max_length=500,null=True,blank=True)
+    comment = models.TextField(max_length=255)
+    reply = models.TextField(max_length=255,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
