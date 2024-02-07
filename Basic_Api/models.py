@@ -201,8 +201,8 @@ class ProductMedia(models.Model):
 
 class Review(models.Model):
     product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
-    r_name = models.CharField(max_length=500)
-    review = models.TextField(max_length=3000)
+    r_name = models.CharField(max_length=255)
+    review = models.TextField(max_length=1000)
     date = models.DateField(auto_now_add=True,null=True,blank=True)
     def __str__(self) -> str:
         return self.r_name
@@ -212,7 +212,7 @@ class Review(models.Model):
 
 class Cupon(models.Model):
     cupun_code = models.CharField(max_length=200,unique=True)
-    offer_name = models.CharField(max_length=500)
+    offer_name = models.CharField(max_length=255)
     price_condition = models.IntegerField()
     discount_in_percentage = models.IntegerField()
     active = models.BooleanField(default=True)
@@ -225,7 +225,7 @@ class Cupon(models.Model):
 
 
 class OurClient(models.Model):
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='OurClient/',null=True,blank=True)
     link = models.URLField()
 
@@ -234,7 +234,7 @@ class OurClient(models.Model):
     
 
 class Supplier(models.Model):
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='OurSupplier/',null=True,blank=True)
     link = models.URLField()
 
