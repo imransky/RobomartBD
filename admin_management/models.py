@@ -12,9 +12,9 @@ class Sell(models.Model):
 
 class Contact(models.Model):
     
-    name = models.CharField(max_length = 500)
+    name = models.CharField(max_length = 255)
     email = models.CharField(max_length = 100)
-    msg = models.CharField(max_length = 1000)
+    msg = models.TextField(max_length = 1000)
     
     def __str__(self):
         return f"name: {self.name} Email: {self.email}"

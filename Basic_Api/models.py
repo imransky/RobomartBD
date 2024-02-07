@@ -30,16 +30,16 @@ class User(AbstractUser):
         max_length=255,
         unique=True,
     )
-    first_name = models.CharField(max_length=500,null=True,blank=True)
-    last_name = models.CharField(max_length=500,null=True,blank=True)
+    first_name = models.CharField(max_length=255,null=True,blank=True)
+    last_name = models.CharField(max_length=255,null=True,blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     balance = models.IntegerField(default=0)
-    balance_ref = models.CharField(max_length=500,null=True,blank=True)
+    balance_ref = models.CharField(max_length=255,null=True,blank=True)
     phone = models.CharField(max_length=18,null=True,blank=True)
-    address = models.CharField(max_length=1000,null=True,blank=True)
-    password_forget_token = models.CharField(max_length=300,null=True,blank=True)
+    address = models.CharField(max_length=255,null=True,blank=True)
+    password_forget_token = models.CharField(max_length=255,null=True,blank=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
 
@@ -166,15 +166,15 @@ class Product(models.Model):
     "icons" : {"insertCodeBlock":"<i class=\"fa fa-code\"></i>"}
   }}
     
-    name = models.CharField(max_length=1000)
+    name = models.CharField(max_length=255)
     product_code = models.CharField(max_length=200,null=True,blank=True)
     price = models.IntegerField(verbose_name= "Final Price")
     discount = models.IntegerField()
     after_discount = models.IntegerField(verbose_name="Regular Price")
     photo = models.ImageField(null=True,blank=True)
-    discription = models.TextField(max_length=10000)
+    discription = models.TextField(max_length=500)
     ratting = models.DecimalField(max_digits=5, decimal_places=2)
-    colors = models.CharField(max_length=1000)
+    colors = models.CharField(max_length=255)
     stock = models.IntegerField()
     total_review = models.IntegerField()
     in_stock = models.BooleanField(default=True)

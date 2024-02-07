@@ -24,7 +24,7 @@ class Order(models.Model):
     billing_option = models.CharField(max_length=100,default="CASH_ON_DELIVERY")
     payment_method = models.CharField(max_length=100,null=True,blank=True)
     payment_number = models.CharField(max_length=18,null=True,blank=True)
-    payment_id = models.CharField(max_length=300,null=True,blank=True)
+    payment_id = models.CharField(max_length=255,null=True,blank=True)
 
     order_date = models.DateTimeField(auto_now_add=True)
     total_price = models.IntegerField(blank=True,null=True)

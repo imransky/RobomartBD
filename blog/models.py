@@ -23,8 +23,8 @@ class BlogTag(models.Model):
 
 class Blog(models.Model):
 
-    title = models.CharField(max_length=500)
-    description = models.TextField(max_length=6000,verbose_name="Write Your Description")
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=1000,verbose_name="Write Your Description")
     related_Product = models.ManyToManyField(Product,null=True,blank=True)
     is_tutorial = models.BooleanField(default=False)
     image = models.ImageField(upload_to='Blog/',null=True,blank=True)
@@ -89,7 +89,7 @@ class Pages(models.Model):
     blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
     page_no = models.IntegerField()
     # page title
-    page_title = models.CharField(max_length=3000,null=True,blank=True)
+    page_title = models.CharField(max_length=255,null=True,blank=True)
     op = {'options':{
     
     "toolbarButtons": [[
@@ -119,8 +119,8 @@ class Pages(models.Model):
 class Comment(models.Model):
     commented_by = models.ForeignKey(User,on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
-    comment = models.CharField(max_length=10000)
-    reply = models.CharField(max_length=10000,null=True,blank=True)
+    comment = models.TextField(max_length=500)
+    reply = models.TextField(max_length=500,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
